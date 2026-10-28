@@ -20,7 +20,8 @@ java -jar target/occ-0.1.0.jar --now
 java -jar target/occ-0.1.0.jar --help
 ```
 
-Date output lists year, month, day, hour, minute and second. Invalid commands return exit code 2.
+Gregorian and Otland dates use `yyyy-MM-dd HH:mm:ss`, for example `2196-01-01 00:00:00`.
+Unix timestamps remain decimal seconds. Invalid commands return exit code 2.
 
 The application uses only standard Java. Windows, Linux, and macOS use the same calendar
 and number parsing code. No native library, platform-specific executable, or native-access

@@ -29,8 +29,8 @@ class AppTest {
         assertEquals(0, run("--timestamp", "0"));
         String text = output.toString(StandardCharsets.UTF_8);
         assertTrue(text.contains("Timestamp: 0"));
-        assertTrue(text.contains("Gregorian:"));
-        assertTrue(text.contains("Otland: 2169 13 23 0 63 32"));
+        assertTrue(text.matches("(?s).*Gregorian: [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}.*"));
+        assertTrue(text.contains("Otland: 2169-13-23 00:63:32"));
         assertEquals(0, errors.size());
     }
 
@@ -38,12 +38,13 @@ class AppTest {
     void convertsOtlandFields() {
         assertEquals(0, run("--otland", "2196", "1", "1", "0", "0", "0"));
         assertTrue(output.toString(StandardCharsets.UTF_8).contains("Timestamp: 1759113248"));
+        assertTrue(output.toString(StandardCharsets.UTF_8).contains("Otland: 2196-01-01 00:00:00"));
     }
 
     @Test
     void acceptsANegativeTimestampArgument() {
         assertEquals(0, run("--timestamp", "-1"));
-        assertTrue(output.toString(StandardCharsets.UTF_8).contains("Gregorian: 1899 0 -1 -1 -1 -1"));
+        assertTrue(output.toString(StandardCharsets.UTF_8).contains("Gregorian: 1899-00--1 -1:-1:-1"));
     }
 
     @Test
